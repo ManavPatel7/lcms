@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Add Hearing</title>
+</head>
+<body>
+    <header>
+        <h1>Add Hearings</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <label for="case_id">Select Case:</label>
+            <select id="case_id" name="case_id" required>
+                <!-- Options will be populated dynamically from the database -->
+                <option value="">-- Select a Case --</option>
+                <option value="">-- murder--</option>
+                <option value="">--drink and drive --</option>
+                <option value="">--blackmail--</option>
+                <option value="">--cybercrime --</option>
+                <option value="">--hit and run--</option>
+                <option value="">--bombing--</option>
+                {% for case in cases %}
+                    <option value="{{ case.id }}">{{ case.case_name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="hearing_date">Hearing Date:</label>
+            <input type="date" id="hearing_date" name="hearing_date" required>
+
+            <label for="hearing_time">Hearing Time:</label>
+            <input type="time" id="hearing_time" name="hearing_time" required>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter hearing location" required>
+
+            <button type="submit">Add Hearing<s/button>
+        </form>
+        <p><a href="/case">Back to Case</a></p>
+    </main>
+</body>
+</html>
